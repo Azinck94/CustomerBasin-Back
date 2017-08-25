@@ -1,4 +1,6 @@
-#!/bin/bash
+TEXT="brad"
+TOKEN="BAhJIiU1ZjdkNDgzNTk0NmU0ZTg0NzhhZDI4NDQzYzQ3OTFhYQY6BkVG--1c2527e8b643b425d1cabed1e59af4467a2a5c8c"
+
 
 API="${API_ORIGIN:-http://localhost:4741}"
 URL_PATH="/examples"
