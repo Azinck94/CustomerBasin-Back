@@ -44,4 +44,5 @@ ActiveRecord::Schema.define(version: 2) do
   end
 
   add_foreign_key "examples", "users"
+  add_foreign_key "customers", "users"
 end
