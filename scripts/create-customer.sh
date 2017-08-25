@@ -1,5 +1,7 @@
-TEXT="brad"
-TOKEN="BAhJIiU1ZjdkNDgzNTk0NmU0ZTg0NzhhZDI4NDQzYzQ3OTFhYQY6BkVG--1c2527e8b643b425d1cabed1e59af4467a2a5c8c"
+NAME="Andrew Zinck"
+EMAIL="Bzinck79@gmail.com"
+PHONE="9788072960"
+TOKEN="BAhJIiU0MDA5YTY4OWVjYjJjNDU0MmQxZjA5MzU5NTI0OTg3OQY6BkVG--a129df62bcdc89e3ae8fd13c9002ba4699f9070a"
 
 
 API="${API_ORIGIN:-http://localhost:4741}"
@@ -10,10 +12,10 @@ curl "${API}${URL_PATH}" \
   --header "Content-Type: application/json" \
   --header "Authorization: Token token=$TOKEN" \
   --data '{
+    "customer": {
      "name": "'"${NAME}"'",
      "email": "'"${EMAIL}"'",
-     "phone": "'"${PHONE}"'",
-
+     "phone": "'"${PHONE}"'"
    }
  }'
 echo

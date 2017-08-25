@@ -1,5 +1,5 @@
 class CustomersController < ProtectedController
-  before_action :set_customer, only: [:show, :update, :destroy]
+  before_action :set_customer, only: [:update, :destroy]
 
   # GET /customers
   def index
