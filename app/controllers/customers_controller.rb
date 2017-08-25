@@ -1,4 +1,4 @@
-class CustomersController < ApplicationController
+class CustomersController < ProtectedController
   before_action :set_customer, only: [:show, :update, :destroy]
 
   # GET /customers
@@ -10,12 +10,14 @@ class CustomersController < ApplicationController
 
   # GET /customers/1
   def show
-    render json: @customer
+    @customers = Customer.find(params[:id])
+        render json: @customer
   end
 
   # POST /customers
   def create
-    @customer = Customer.new(customer_params)
+    #@baller = Baller.new(baller_params)
+    @customer = current_user.customers.build(customer_params)
 
     if @customer.save
       render json: @customer, status: :created, location: @customer
@@ -41,7 +43,8 @@ class CustomersController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_customer
-      @customer = Customer.find(params[:id])
+       #@customer = Baller.find(params[:id])
+       @customer = current_user.customers.find(params[:id])
     end
 
     # Only allow a trusted parameter "white list" through.
