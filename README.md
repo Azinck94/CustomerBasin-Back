@@ -1,10 +1,10 @@
-client-side application: https://github.com/Azinck94/The-Vector-Front-End /
-deployed client app: /
-deployed api: https://git.heroku.com/afternoon-beyond-92082.git /
+client-side application: https://github.com/Azinck94/The-Vector-Front-End \
+deployed client app: \
+deployed api: https://git.heroku.com/afternoon-beyond-92082.git \
 
 
 
-ERD:http://imgur.com/dJlK78V /
+ERD:http://imgur.com/dJlK78V \
 A list of your API routes: customers, users.
 
 
