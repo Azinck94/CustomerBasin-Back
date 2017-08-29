@@ -4,7 +4,7 @@ deployed api: https://git.heroku.com/afternoon-beyond-92082.git \
 
 
 
-ERD:http://imgur.com/dJlK78V \
+ERD:http://imgur.com/dJlK78V 
 A list of your API routes: customers, users.
 
 
