@@ -1,3 +1,4 @@
 class MeetingSerializer < ActiveModel::Serializer
-  attributes :id
+  attributes :id, :date
+  has_one :user
 end
