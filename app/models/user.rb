@@ -3,5 +3,5 @@ class User < ApplicationRecord
   include Authentication
   has_many :examples
   has_many :customers
-  has_many :meetings, through: :customers
+  has_many :meetings
 end
