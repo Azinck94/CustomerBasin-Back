@@ -1,5 +1,5 @@
 client-side application: https://github.com/Azinck94/The-Vector-Front-End \
-deployed client app: \
+deployed client app: https://azinck94.github.io/vector-front/
 deployed api: https://git.heroku.com/afternoon-beyond-92082.git \
 
 
