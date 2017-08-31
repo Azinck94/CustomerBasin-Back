@@ -1,4 +1,3 @@
 class MeetingSerializer < ActiveModel::Serializer
-  attributes :id, :date
-  has_one :user
+  attributes :id, :scheduled_at
 end

@@ -10,11 +10,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170825133001) do
+ActiveRecord::Schema.define(version: 20170830190223) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "ballers", force: :cascade do |t|
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "team"
+    t.string   "position"
+    t.integer  "buckets"
+    t.integer  "rpg"
+    t.integer  "apg"
+    t.string   "sponsors"
+    t.string   "shoes"
+    t.string   "catchphrase"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.integer  "user_id"
+    t.index ["user_id"], name: "index_ballers_on_user_id", using: :btree
+  end
 
   create_table "customers", force: :cascade do |t|
     t.string   "name"
@@ -34,7 +50,22 @@ ActiveRecord::Schema.define(version: 20170825133001) do
     t.index ["user_id"], name: "index_examples_on_user_id", using: :btree
   end
 
+  create_table "meetings", force: :cascade do |t|
+    t.date     "scheduled_at"
+    t.integer  "customer_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.index ["customer_id"], name: "index_meetings_on_customer_id", using: :btree
+  end
 
+  create_table "teams", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "baller_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["baller_id"], name: "index_teams_on_baller_id", using: :btree
+    t.index ["user_id"], name: "index_teams_on_user_id", using: :btree
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "email",           null: false
@@ -46,8 +77,10 @@ ActiveRecord::Schema.define(version: 20170825133001) do
     t.index ["token"], name: "index_users_on_token", unique: true, using: :btree
   end
 
-
+  add_foreign_key "ballers", "users"
   add_foreign_key "customers", "users"
   add_foreign_key "examples", "users"
-
+  add_foreign_key "meetings", "customers"
+  add_foreign_key "teams", "ballers"
+  add_foreign_key "teams", "users"
 end

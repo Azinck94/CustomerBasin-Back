@@ -46,6 +46,6 @@ class MeetingsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def meeting_params
-      params.fetch(:meeting, {})
+    params.require(:meeting).permit(:scheduled_at, :customer_id, :user_id)
     end
 end
