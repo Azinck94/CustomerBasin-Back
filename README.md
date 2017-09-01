@@ -213,6 +213,4 @@ Content-Type: application/json; charset=utf-8
   }
 }
 ```
-Explanations of the technologies used
-A couple paragraphs about the general approach you took
-The back end was relatively easy to construct in comparison with the front end for this project. I didnt have much trouble setting up the customer model or creating user ownership over it.
+ I didnt have much trouble setting up the customer model or creating user ownership over it.
