@@ -1,60 +1,26 @@
+client-side application: https://github.com/Azinck94/The-Vector-Front-End
+deployed client app: https://azinck94.github.io/vector-front/ deployed api: https://git.heroku.com/afternoon-beyond-92082.git \
 
-Client Repo: https://github.com/Azinck94/vector-front
-Deployed App: https://azinck94.github.io/vector-front/
-Heroku: https://afternoon-beyond-92082.herokuapp.com/
-ERD: http://imgur.com/dJlK78V
-list of API routes: customers, users.
+ERD:http://imgur.com/dJlK78V
+API routes: customers, users and meetings.
 
-I used rails express template as the baseline, created a has many relationship structure between users and customers where users have many customers and customers belong to a specific user.
+API
 
-If I had more time I would like to create an additional feature for scheduling meetings between users and customers. 
-## Structure
+Use this as the basis for your own API documentation. Add a new third-level heading for your custom entities, and follow the pattern provided for the built-in user authentication documentation.
 
-This template follows the standard project structure in Rails 4.
+Scripts are included in scripts to test built-in actions. Add your own scripts to test your custom API. As an alternative, you can write automated tests in RSpec to test your API.
 
-`curl` command scripts are stored in [`scripts`](scripts) with names that
-correspond to API actions.
+Authentication
 
-User authentication is built-in.
-
-## Tasks
-
-Developers should run these often!
-
--   `bin/rake routes` lists the endpoints available in your API.
--   `bin/rake test` runs automated tests.
--   `bin/rails console` opens a REPL that pre-loads the API.
--   `bin/rails db` opens your database client and loads the correct database.
--   `bin/rails server` starts the API.
--   `scripts/*.sh` run various `curl` commands to test the API. See below.
-
-<!-- TODO -   `rake nag` checks your code style. -->
-<!-- TODO -   `rake lint` checks your code for syntax errors. -->
-
-## API
-
-Use this as the basis for your own API documentation. Add a new third-level
-heading for your custom entities, and follow the pattern provided for the
-built-in user authentication documentation.
-
-Scripts are included in [`scripts`](scripts) to test built-in actions. Add your
-own scripts to test your custom API. As an alternative, you can write automated
-tests in RSpec to test your API.
-
-### Authentication
-
-| Verb   | URI Pattern            | Controller#Action |
-|--------|------------------------|-------------------|
-| POST   | `/sign-up`             | `users#signup`    |
-| POST   | `/sign-in`             | `users#signin`    |
-| PATCH  | `/change-password/:id` | `users#changepw`  |
-| DELETE | `/sign-out/:id`        | `users#signout`   |
-
-#### POST /sign-up
+Verb	URI Pattern	Controller#Action
+POST	/sign-up	users#signup
+POST	/sign-in	users#signin
+PATCH	/change-password/:id	users#changepw
+DELETE	/sign-out/:id	users#signout
+POST /sign-up
 
 Request:
 
-```sh
 curl http://localhost:4741/sign-up \
   --include \
   --request POST \
@@ -66,15 +32,9 @@ curl http://localhost:4741/sign-up \
       "password_confirmation": "'"${PASSWORD}"'"
     }
   }'
-```
-
-```sh
 EMAIL=ava@bob.com PASSWORD=hannah scripts/sign-up.sh
-```
-
 Response:
 
-```md
 HTTP/1.1 201 Created
 Content-Type: application/json; charset=utf-8
 
@@ -84,13 +44,10 @@ Content-Type: application/json; charset=utf-8
     "email": "ava@bob.com"
   }
 }
-```
-
-#### POST /sign-in
+POST /sign-in
 
 Request:
 
-```sh
 curl http://localhost:4741/sign-in \
   --include \
   --request POST \
@@ -101,15 +58,9 @@ curl http://localhost:4741/sign-in \
       "password": "'"${PASSWORD}"'"
     }
   }'
-```
-
-```sh
 EMAIL=ava@bob.com PASSWORD=hannah scripts/sign-in.sh
-```
-
 Response:
 
-```md
 HTTP/1.1 200 OK
 Content-Type: application/json; charset=utf-8
 
@@ -120,13 +71,10 @@ Content-Type: application/json; charset=utf-8
     "token": "BAhJIiVlZDIwZTMzMzQzODg5NTBmYjZlNjRlZDZlNzYxYzU2ZAY6BkVG--7e7f77f974edcf5e4887b56918f34cd9fe293b9f"
   }
 }
-```
-
-#### PATCH /change-password/:id
+PATCH /change-password/:id
 
 Request:
 
-```sh
 curl --include --request PATCH "http://localhost:4741/change-password/$ID" \
   --header "Authorization: Token token=$TOKEN" \
   --header "Content-Type: application/json" \
@@ -136,64 +84,38 @@ curl --include --request PATCH "http://localhost:4741/change-password/$ID" \
       "new": "'"${NEWPW}"'"
     }
   }'
-```
-
-```sh
 ID=1 OLDPW=hannah NEWPW=elle TOKEN=BAhJIiVlZDIwZTMzMzQzODg5NTBmYjZlNjRlZDZlNzYxYzU2ZAY6BkVG--7e7f77f974edcf5e4887b56918f34cd9fe293b9f scripts/change-password.sh
-```
-
 Response:
 
-```md
 HTTP/1.1 204 No Content
-```
-
-#### DELETE /sign-out/:id
+DELETE /sign-out/:id
 
 Request:
 
-```sh
 curl http://localhost:4741/sign-out/$ID \
   --include \
   --request DELETE \
   --header "Authorization: Token token=$TOKEN"
-```
-
-```sh
 ID=1 TOKEN=BAhJIiVlZDIwZTMzMzQzODg5NTBmYjZlNjRlZDZlNzYxYzU2ZAY6BkVG--7e7f77f974edcf5e4887b56918f34cd9fe293b9f scripts/sign-out.sh
-```
-
 Response:
 
-```md
 HTTP/1.1 204 No Content
-```
+Users
 
-### Users
-
-| Verb | URI Pattern | Controller#Action |
-|------|-------------|-------------------|
-| GET  | `/users`    | `users#index`     |
-| GET  | `/users/1`  | `users#show`      |
-
-#### GET /users
+Verb	URI Pattern	Controller#Action
+GET	/users	users#index
+GET	/users/1	users#show
+GET /users
 
 Request:
 
-```sh
 curl http://localhost:4741/users \
   --include \
   --request GET \
   --header "Authorization: Token token=$TOKEN"
-```
-
-```sh
 TOKEN=BAhJIiVlZDIwZTMzMzQzODg5NTBmYjZlNjRlZDZlNzYxYzU2ZAY6BkVG--7e7f77f974edcf5e4887b56918f34cd9fe293b9f scripts/users.sh
-```
-
 Response:
 
-```md
 HTTP/1.1 200 OK
 Content-Type: application/json; charset=utf-8
 
@@ -209,24 +131,15 @@ Content-Type: application/json; charset=utf-8
     }
   ]
 }
-```
-
-#### GET /users/:id
+GET /users/:id
 
 Request:
 
-```sh
 curl --include --request GET http://localhost:4741/users/$ID \
   --header "Authorization: Token token=$TOKEN"
-```
-
-```sh
 ID=2 TOKEN=BAhJIiVlZDIwZTMzMzQzODg5NTBmYjZlNjRlZDZlNzYxYzU2ZAY6BkVG--7e7f77f974edcf5e4887b56918f34cd9fe293b9f scripts/user.sh
-```
-
 Response:
 
-```md
 HTTP/1.1 200 OK
 Content-Type: application/json; charset=utf-8
 
@@ -236,36 +149,4 @@ Content-Type: application/json; charset=utf-8
     "email": "bob@ava.com"
   }
 }
-```
-### Customers
-
-
-#### POST /customers/:id
-
-
-```
-API="${API_ORIGIN:-http://localhost:4741}"
-URL_PATH="/customers"
-curl "${API}${URL_PATH}" \
-  --include \
-  --request POST \
-  --header "Content-Type: application/json" \
-  --header "Authorization: Token token=$TOKEN" \
-  --data '{
-    "customer": {
-     "name": "'"${NAME}"'",
-     "email": "'"${EMAIL}"'",
-     "phone": "'"${PHONE}"'"
-   }
- }'
-
-```
-#### GET /customers/:id
-```
-API="${API_ORIGIN:-http://localhost:4741}"
-URL_PATH="/customers"
-curl "${API}${URL_PATH}" \
-  --include \
-  --request GET \
-  --header "Authorization: Token token=$TOKEN"
-  ```
+I didnt have much trouble setting up the customer model or creating user ownership over it.
